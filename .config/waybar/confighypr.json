@@ -1,0 +1,84 @@
+{
+	"layer": "top",
+	"position": "top", 
+	"height": "10px",
+	"modules-left": [
+		"hyprland/workspaces",
+		"hyprland/window"
+	],
+	"modules-center": [""],
+	"modules-right": [
+		"pulseaudio",
+		"bluetooth",
+		"network",
+		"battery"
+	],
+	
+	"wlr/workspaces": {
+	"format": "{icon}",
+	"format-icons": {
+		"1": "🯆",
+		"2": "",
+		"3": "",
+		"focused": "",
+		"default": ""
+		},
+	"sort-by-number": true
+	},
+
+	"hyprland/window": {
+		"format": "<span foreground=\"#222\">⊳</span>    {}",
+		"separate-outputs": true
+	},
+	
+	"pulseaudio": {
+		"format": "<span foreground=\"#222\">{icon}</span>    {volume}%",
+		"format-bluetooth": "<span foreground=\"#222\">{icon}</span>   {volume}%",
+		"format-muted": "<span foreground=\"#222\"></span>",
+		"format-icons": {
+			"headphone": "",
+			"default": ["", ""]
+			},
+		"scroll-step": 1,
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"on-click-right": "pavucontrol",
+		"ignored-sinks": ["Easy Effects Sink"]
+	},
+	
+	"bluetooth": {
+		"format": "<span foreground=\"#222\"></span>    {num_connections} connections",
+		"format-off": "<span foreground=\"#222\"></span>",
+		"on-click": "bt-toggle",
+		"on-click-right": "kitty bluetuith",
+		"tooltip-format": "{status}"
+	},
+	
+	"network": {
+		"interface": "wlp2s0",
+		"format": "<span foreground=\"#222\"></span>    {essid} ({signalStrength}%)",
+
+		"format-ethernet": "{ipaddr}/{cidr} ",
+		"format-disconnected": "<span foreground=\"#222\"></span>    disconnected",
+		"tooltip-format": "{ifname} via {gwaddr} ",
+		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+		"tooltip-format-ethernet": "{ifname} ",
+		"tooltip-format-disconnected": "Disconnected",
+		"max-length": 50,
+		"on-click": "iwctl station wlan0 scan & kitty nmtui"
+	},
+	
+	"battery": {
+		"states": {
+			"full": 98,
+			"good": 90,
+			"warning": 40,
+			"critical": 20
+		},
+		"interval": 30,
+		"format": "<span foreground=\"#222\">❤</span>    {capacity}%",
+		"format-charging": "<span foreground=\"#222\">❤</span>    {capacity}%",
+		"format-plugged": "<span foreground=\"#222\">❤</span>    {capacity}%",
+		"on-click": "wlogout"
+	},
+	
+}

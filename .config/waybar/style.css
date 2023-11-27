@@ -1,0 +1,106 @@
+@import url('/home/zzyzx/.cache/wal/colors-waybar.css');
+
+* {
+	font-family: "Iosevka Term";
+	font-size: 9pt;
+	border-radius: 4px;
+}
+
+window#waybar {
+	background-color: rgba(0,0,0,0);
+}
+
+
+window#waybar > box {
+	/*box-shadow: 0 2 2 2 rgba(0,0,0,0.1);*/
+}
+
+#workspaces, #window, #pulseaudio, #bluetooth, #network, #battery {
+	border: 1px solid;
+	border-color: rgba(255,255,255,0.1);
+	margin-right: 8px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	padding: 0 12 0 12;
+	background-color: @background;
+	color: @color7;
+}
+
+#workspaces {
+	padding: 0px;
+	margin-left: 1em;
+	/*in case i need shadow lol*/
+	/*margin-bottom: 1em;*/
+	background-color: @color0;
+}
+
+/*this controls height*/
+#workspaces button {
+	/*margin: 0 0 0 0;*/
+	padding: 0 7 0 7;
+	color: @color0;
+	border-radius: 3px;
+}
+
+/*hyprland*/
+#workspaces button.active {
+	background-color: @color1;
+	transition-property: background-color;
+	transition-duration: 0.7s;
+	background-color: @color1;
+	color: @color1;
+}
+
+#workspaces button.focused {
+	background-color: @color1;
+	transition-property: background-color;
+	transition-duration: 0.7s;
+	background-color: @color1;
+	color: @color1;
+}
+
+#window{
+	box-shadow: 31px 0px 0px 0px @color6 inset;
+}
+
+#pulseaudio {
+	box-shadow: 31px 0px 0px 0px @color3 inset;
+}
+
+#bluetooth {
+	box-shadow: 31px 0px 0px 0px @color4 inset;
+}
+
+#network {
+	box-shadow: 31px 0px 0px 0px @color5 inset;
+}
+
+#network.disconnected {
+}
+
+#network.disabled {
+}
+
+#battery {
+	box-shadow: 31px 0px 0px 0px @color2 inset;
+}
+
+#battery:not(.charging) {
+}
+
+#battery.charging{
+}
+
+#battery.warning:not(.charging) {
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: @color8;
+    }
+}
