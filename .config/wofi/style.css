@@ -1,0 +1,60 @@
+@import "/home/zzyzx/.cache/wal/colors-waybar.css";
+@define-color clear rgba(0, 0, 0, 0.0);
+@define-color primary rgba(0, 0, 0, 0.75);
+
+window {
+	padding: 0px;
+	margin: 0px;
+	border: 0px solid;
+	background-color: @foreground;
+	border-radius: 4px;
+	font-family: "Iosevka Mayukai Firacode Nerd Font Complete";
+	font-size: 12;
+	color: @background;
+}
+
+#input {
+	background-color: @color7;
+	/*padding: 4px;*/
+	/*margin: 4px;*/
+	border: none;
+	outline: none;
+}
+
+#inner-box {
+	/*margin: 4px;*/
+	border: 0px solid;
+	border-radius: 8px;
+}
+
+#outer-box {
+	/*margin: 2px;*/
+	border: none;
+	/*border-radius: 8px;*/
+}
+
+#scroll {
+	margin: 0px;
+	border: none;
+}
+
+#text:selected {
+	background: @color8;
+	margin: 0px 0px;
+	border: none;
+	/*border-radius: 8px;*/
+}
+
+#entry {
+	margin: 0px 0px;
+	border: none;
+	border-radius: 0px;
+	background-color: transparent;
+}
+
+#entry:selected {
+	margin: 0px 0px;
+	border: none;
+	border-radius: 3px;
+	background-color: @color8;
+}

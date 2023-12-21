@@ -1,0 +1,13 @@
+term=kitty
+location=top
+yoffset=370
+width=15%
+lines=5
+
+prompt=
+show=drun
+insensitive=true
+hide_scroll=true
+
+aways_parse_args=true
+show_all=true

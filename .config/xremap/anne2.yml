@@ -1,0 +1,27 @@
+#modmap:
+  #- name: Global
+    #remap:
+      #CapsLock: Esc
+      #ALT_L: WIN_L
+      #WIN_L: ALT_L
+      #ALT_R: WIN_R
+      #CONTROL_R: ALT_R
+
+keymap:
+  - name: Global
+    remap:
+      C-up: PageUp
+      C-down: PageDown
+  - name: firefox
+    application:
+      only: ['Firefox', 'firefoxdeveloperedition', 'firefox']
+    remap:
+      Super-c: C-c
+      #bemenu+cliphist instead
+      #Super-v: C-v
+      #hyprland for custom tab page in firefox
+      #Super-t: C-t
+      Super-a: C-a
+      Super-l: C-l
+      Super-w: C-w
+      Super-z: C-z

@@ -1,0 +1,49 @@
+#term
+bindsym $mod+Return exec $term
+
+#kill
+bindsym $mod+q kill
+
+#launch
+bindsym $mod+Space exec $menu
+
+#bar
+bindsym $mod+b exec bar
+
+#reload
+bindsym $mod+Shift+z reload
+
+#exit
+bindsym $mod+z exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+#shutdown
+bindsym $mod+Shift+q exec wlogout
+
+#tpro
+bindsym $mod+Shift+t exec bash /home/zzyzx/scripts/tpro
+
+#brightnessctl
+bindsym XF86MonBrightnessUp exec brightnessctl -q set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl -q set 5%-
+bindsym $mod+2 exec brightnessctl -q set +5%
+bindsym $mod+1 exec brightnessctl -q set 5%-
+
+#volume
+bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+5 exec pactl -- set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $mod+4 exec pactl -- set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+3 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+#bluetooth/wifi
+bindsym $mod+6 exec bt-toggle
+
+#rice
+bindsym $mod+Shift+r exec colorlovers -nr && reload-dunst && bar && swaymsg -t get_outputs | grep -q 'LG' && bar && kanshi
+bindsym $mod+0 exec swaywal
+
+#screenshot
+bindsym $mod+Shift+p exec grim /home/zzyzx/.cache/scr/$(date +'%s_scr.png')
+bindsym $mod+p exec grim -g "$(slurp)" /home/zzyzx/.cache/scr/$(date +'%s_scr.png')
+
