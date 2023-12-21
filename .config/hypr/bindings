@@ -1,0 +1,70 @@
+############################
+#  B  I  N  D  I  N  G  S  #
+############################
+
+#hyprland
+$mainMod = SUPER
+bind = $mainMod, Q, killactive, 
+
+#wlogout
+#bind = $mainMod SHIFT, Q, exec, wlogout -p layer-shell -L 777 -R 777 -T 480 -B 480
+# blurred background for wlogout
+bind = $mainMod SHIFT, Q, exec, sh -c "grim -t jpeg /home/zzyzx/.config/wlogout/shot.jpg && convert -scale 10% -blur 0x2.5 -resize 1000% /home/zzyzx/.config/wlogout/shot.jpg /home/zzyzx/.config/wlogout/shot.jpg && wlogout -p layer-shell -L 777 -R 777 -T 480 -B 480"
+
+
+#kitty
+bind = $mainMod, RETURN, exec, /usr/bin/kitty
+
+#fullscreen
+bind = $mainMod SHIFT, F, fullscreen
+
+#launch
+#bind = $mainMod, SPACE, exec, wofi --show run --conf=/home/zzyzx/.config/wofi/config
+bind = $mainMod, SPACE, exec, brun
+#bind = $mainMod, SPACE, exec, bemenu-run --fb='$bcolor1' -b -l 3 -H 60px --fn "Iosevka Term 33" --prompt "exec"
+
+#cliphist
+bind = $mainMod, V, exec, bpaste
+
+#window switcher
+bind = $mainMod, Tab, exec, bwindow
+
+#brightnessctl
+bind = , XF86MonBrightnessUp, exec, brightnessctl -q set +5%
+bind = , XF86MonBrightnessDown, exec, brightnessctl -q set 5%-
+bind = $mainMod, 2, exec, brightnessctl -q set +5%
+bind = $mainMod, 1, exec, brightnessctl -q set 5%-
+
+#pulseaudio
+bind = , XF86AudioRaiseVolume, exec, pactl -- set-sink-volume @DEFAULT_SINK@ +5%
+bind = , XF86AudioLowerVolume, exec, pactl -- set-sink-volume @DEFAULT_SINK@ -5%
+bind = , XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle
+bind = $mainMod, 5, exec, pactl -- set-sink-volume @DEFAULT_SINK@ +5%
+bind = $mainMod, 4, exec, pactl -- set-sink-volume @DEFAULT_SINK@ -5%
+bind = $mainMod, 3, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+#bluetooth/wifi
+bind = $mainMod, 6, exec, bt-toggle
+
+#rice
+bind = $mainMod SHIFT, 0, exec, colorlovers -r && reload-dunst & bar & sleep 0.5 && wal-set-linux && notify-send "$(cat $HOME/.cache/colorlovers/colorlovers)"
+
+bind = $mainMod, 0, exec, /home/zzyzx/scripts/bin/swaywal
+
+#web
+bind = $mainMod, T, exec, firefox file:///home/zzyzx/scripts/always-floating/index.html
+
+#screenshot
+bind = $mainMod, P, exec, grim /home/zzyzx/pictures/screenshots/$(date +'scr-%Y-%m-%d-%H-%M-%S.png')
+bind = $mainMod SHIFT, P, exec, grim -g "$(slurp)" /home/zzyzx/pictures/screenshots/$(date +'scr-%Y-%m-%d-%H-%M-%S.png')
+
+#video record
+bind = $mainMod, M, exec, record
+bind = $mainMod SHIFT, M, exec, record slurp
+
+#lastfm notifcation
+bind = $mainMod SHIFT, L, exec, lastfm -no
+
+#dunst close with escape
+bind = $mainMod, ESCAPE, exec, dunstctl close-all
+

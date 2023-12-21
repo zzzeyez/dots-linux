@@ -1,0 +1,257 @@
+#  ██   ████
+# ░██  ░██░
+# ░██ ██████ ██████  █████
+# ░██░░░██░ ░░██░░█ ██░░░██
+# ░██  ░██   ░██ ░ ░██  ░░
+# ░██  ░██   ░██   ░██   ██
+# ███  ░██  ░███   ░░█████
+#░░░   ░░   ░░░     ░░░░░
+
+#V SELECT
+#oo OPEN WITH
+
+#xx CUT
+#yy COPY
+#yp COPY PATH
+#yn COPY NAME
+#pp PASTE
+
+#dd MV TO TRASH 
+#rr RENAME
+
+#mm MAKE DIRECTORY
+
+#. SHOW HIDDEN
+#h TOGGLE PREVIEW
+#G/g BOTTOM/TOP
+#N/n PREV/NEXT
+
+#w SET WALLPAPER
+
+set shell sh
+set shellopts '-eu'
+set ifs "\n"
+set filesep "\n"  # default already
+
+# single column on small panes
+set promptfmt "\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m" # remove file name
+set preview true
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/clean
+
+# annoying underline lol
+set cursorpreviewfmt ""
+# statusbar
+set statfmt ""
+set rulerfmt ""
+
+
+set period 1
+#set hidden
+set ignorecase true
+
+#set icons
+set incsearch
+set scrolloff 10 # leave some space at the top and the bottom of the screen
+set tabstop 2
+set smartcase
+
+set icons
+
+set sortby natural
+#set ratios '10:16'
+set ratios '10:16:26'
+set timefmt '2006-01-02 15:04:05 -0700'
+
+# bindings
+# remove defaults
+map p
+map t
+map m
+map o
+map n
+map "'"
+map '"'
+map d
+map c
+map e
+map y
+map r
+map f
+map F
+map v
+map V :toggle; down
+
+# basic
+map . set hidden!
+map g top
+map G bottom
+
+# quit in current dir
+map q $$SHELL
+
+map xx cut
+map yy copy
+map pp paste
+# paste as a symbolic link to original
+#cmd paste_link %{{
+    #for file in $(lf -remote 'load'); do
+        #if [ ! -n "${mode+1}" ]; then
+            #mode="$file"
+            #continue
+        #fi
+        #files+=("$file")
+    #done
+    #if [ -z "$files" ] || [ "${#files[@]}" -lt 1 ]; then
+        #lf -remote "send $id echo no files to link files: ${files}"
+        #exit 0
+    #fi
+    #ln -sr $files -t .
+#}}
+#map pl paste_link
+# trash
+cmd trash2 ${{
+	set -f
+	if hash trash-put 2>/dev/null; then
+		trash-put -v -- $fx
+	else
+		mkdir -p "$HOME"/.trash
+		mv -vi $fx "$HOME"/.trash
+	fi
+}}
+# trash command with confirmation
+cmd trash %{{
+    for f in $fx; do
+        printf "Trash $f? [Y/n/a] "
+        read -r ans
+        case "$ans" in
+            Y*|y*) trash-put "$f"; printf "Deleted $f.";;
+            A*|a*) trash-put $fx; printf "Deleted all files."; break;;
+            *) printf "Not deleting $f"; sleep 1;;
+        esac
+    done
+}}
+cmd restore_trash ${{
+  trash-restore
+}}
+# Trash Mappings
+map dd trash
+
+#mkdir
+cmd mkdir %[ -n "${1}" ] && mkdir -p ${@} || echo "Argument needed"
+map mm push :mkdir<space>
+
+cmd open-with %"$@" $fx
+map oo push :open-with<space>
+
+# Replace open command with robust selection of openers
+cmd open ${{
+	case $(file --dereference --mime-type $f -b) in
+		inode/x-empty) $EDITOR $fx ;;
+		text/*) $EDITOR $fx;;
+		#video/*) nohup mpv $fx > /dev/null & ;;
+		#audio/*) nohup mpv $fx > /dev/null & ;;
+		#audio/midi) timidity $fx ;;
+		#application/epub+zip) nohup FBReader $f > /dev/null & ;;
+		#application/pdf) nohup zathura $f > /dev/null & ;;
+		*) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+	esac
+}}
+
+
+map C
+# {{{ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Search >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+map n search-next
+map N search-prev
+
+
+# {{{ <<<<<<<<<<<<<<<<<<<<<<<<<< Rename <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# Edit filename before the extension
+map rr ${{
+	# get 'basename' of the selection
+	filename="${f##*/}"
+	# quote it so we won't deal with quotes in the lf -remote command
+	filename="$(printf '%q' "$filename")"
+	filename="${filename// /<space>}"
+	lf -remote "send $id push :rename<space>$filename<a-b><c-b>"
+}}
+
+
+
+# {{{ =========================== Yank paths ===========================
+
+cmd yank-path $printf '%s' "$fx" | wl-copy
+cmd yank-basename $printf '%s' "$(basename -a -- $fx)" |  wl-copy
+map y
+#map yY copy_path
+map yp yank-path
+map yn yank-basename
+
+# {{{ <<<<<<<<<<<<<<<<<<<<<<<<< Toggle Preview <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#cmd showpreview &{{
+    #lf -remote "send $id set preview"
+    #lf -remote "send $id set ratios 1:2:3"
+    #lf -remote "send $id map zp nopreview"
+#}}
+#cmd nopreview &{{
+    #lf -remote "send $id set nopreview"
+    #lf -remote "send $id ratios 1:3"
+    #lf -remote "send $id map zp showpreview"
+#}}
+#map HH nopreview
+#map hh showpreview
+#
+cmd toggle_preview %{{
+    if [ "$lf_preview" = "true" ]; then
+        lf -remote "send $id :set preview false"
+    else
+        lf -remote "send $id :set preview true"
+    fi
+}}
+
+map h toggle_preview
+
+cmd on-cd &{{
+    printf "\033]0; $(pwd | sed "s|$HOME|~|")\007" > /dev/tty
+    # display git repository status in your prompt
+    #source /usr/share/git/completion/git-prompt.sh
+    source ~/.oh-my-zsh/plugins/gitfast/git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=auto
+    GIT_PS1_SHOWSTASHSTATE=auto
+    GIT_PS1_SHOWUNTRACKEDFILES=auto
+    GIT_PS1_SHOWUPSTREAM=auto
+    GIT_PS1_COMPRESSSPARSESTATE=auto
+    git=$(__git_ps1 " [GIT BRANCH: %s]") || true
+    fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%w\033[0m\033[33;1m$git\033[0m"
+    lf -remote "send $id set promptfmt \"$fmt\""
+}}
+# also run at startup
+on-cd
+
+# define a custom 'open' command
+# This command is called when current file is not a directory. You may want to
+# use either file extensions and/or mime types here. Below uses an editor for
+# text files and a file opener for the rest.
+cmd open ${{
+	export EDITOR='nvim'
+	export OPENER='xdg-open'
+    case $(file --mime-type $f -b) in
+        text/*) $EDITOR $fx;;
+        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
+map <enter> open "$f"
+
+cmd wallpaper ${{
+	swaybg -m fill -i "$f" > /dev/null &
+}}
+
+map w wallpaper "$f"
+
+cmd upload ${{
+	notify-send "uploading.."
+	upload "$f"
+}}
+
+map UU upload "$f"

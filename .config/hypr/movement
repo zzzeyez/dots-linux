@@ -1,0 +1,55 @@
+############################
+#  M  O  V  E  M  E  N  T #
+############################
+
+#float
+bind = CONTROL, SPACE, togglefloating, 
+
+#resize mode
+bind = $mainMod SHIFT, R, submap, resize
+submap = resize
+binde = ,right, resizeactive, 10 0
+binde = ,left, resizeactive, -10 0
+binde = ,up, resizeactive, 0 -10
+binde = ,down, resizeactive, 0 10
+bind = ,escape, submap, reset 
+submap = reset
+
+#move focus
+bind = $mainMod, left, movefocus, l
+bind = $mainMod, right, movefocus, r
+bind = $mainMod, up, movefocus, u
+bind = $mainMod, down, movefocus, d
+
+#move window
+bind = $mainMod SHIFT, left, movewindow, l
+bind = $mainMod SHIFT, right, movewindow, r
+bind = $mainMod SHIFT, up, movewindow, u
+bind = $mainMod SHIFT, down, movewindow, d
+
+#go to workspace
+bind = CONTROL, right, workspace, +1
+bind = CONTROL, left, workspace, -1
+bind = CONTROL, 1, workspace, 1
+bind = CONTROL, 2, workspace, 2
+bind = CONTROL, 3, workspace, 3
+bind = CONTROL, 4, workspace, 4
+bind = CONTROL, 5, workspace, 5
+#pseudo hide
+bind = $mainMod SHIFT, h, togglespecialworkspace
+
+#move to workspace
+bind = CONTROL SHIFT, right, movetoworkspace, +1
+bind = CONTROL SHIFT, left, movetoworkspace, -1
+bind = CONTROL SHIFT, 1, movetoworkspace, 1
+bind = CONTROL SHIFT, 2, movetoworkspace, 2
+bind = CONTROL SHIFT, 3, movetoworkspace, 3
+bind = CONTROL SHIFT, 4, movetoworkspace, 4
+bind = CONTROL SHIFT, 5, movetoworkspace, 5
+#pseudo hide
+bind = $mainMod, h, movetoworkspacesilent, special
+
+
+# Move/resize windows with mainMod + LMB/RMB and dragging
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow

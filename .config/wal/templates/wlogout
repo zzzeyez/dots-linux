@@ -1,0 +1,55 @@
+* {{
+}}
+window {{
+	background-color: rgba(00,0,0,0);
+  background-image: image(url("/home/zzyzx/.config/wlogout/shot.jpg"), url("/home/zzyzx/.config/wlogout/shot.jpg"));
+}}
+button {{
+  color: {color4};
+	background-color: {color8};
+	border-style: solid;
+	border-color: rgba(255,255,255,0.2);
+	border-width: 0px;
+	border-radius: 0px;
+	box-shadow: none;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 39%;
+}}
+
+button:focus, button:active, button:hover {{
+	background-color: {color4};
+	outline-style: none;
+	border-width: 1px 1px 1px 1px;
+}}
+
+#shutdown {{
+	border-width: 1px 0px 1px 1px;
+	border-radius: 7px 0 0 7px;
+  background-image: image(url("/home/zzyzx/.config/wlogout/power.png"), url("/home/zzyzx/.config/wlogout/power.png"));
+}}
+
+#logout {{
+	border-width: 1px 0px 1px 0px;
+	background-image: image(url("/home/zzyzx/.config/wlogout/logout.png"), url("/home/zzyzx/.config/wlogout/logout.png"));
+}}
+
+#reboot {{
+	border-width: 1px 1px 1px 0px;
+	border-radius: 0 7px 7px 0;
+  background-image: image(url("/home/zzyzx/.config/wlogout/reboot.png"), url("/home/zzyzx/.config/wlogout/reboot.png"));
+}}
+
+#i dont use these right now
+
+#lock {{
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+}}
+
+#suspend {{
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+}}
+
+#hibernate {{
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+}}

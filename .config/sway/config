@@ -1,0 +1,49 @@
+###########
+# ZZZEYEZ #
+###########
+
+
+#output eDP-1 mode 1920x1080@165.004hz position 0,0 
+#output DP-1 scale 1 resolution 3840x2160@60hz position 1920,0 scale_filter smart
+
+#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+#exec hash dbus-update-activation-environment 2>/dev/null && \
+		 #dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+set $mod Mod4
+set $term kitty
+set $menu wofi --show run --conf=/home/zzyzx/.config/wofi/config
+
+output * bg ~/downloads/art/wall.jpg fill
+exec bar
+exec xremap /home/zzyzx/.config/xremap/config.yml
+
+#font (top affects size)
+font pango:Iosevka Mayukai Codepro Nerd Font Complete 13
+for_window [app_id=".*"] title_format "<span font='Iosevka Mayukai Firastorm Nerd Font Complete 10'>%title</span>"
+
+# colors
+include /home/zzyzx/.cache/wal/colors-sway
+
+#colors <3
+#class border backgr. text indicator child_border
+client.focused $color7 $color7 $color0 $color7 $color7
+client.unfocused $color7 $color7 $color7 $color7 $color7
+
+gaps inner 10
+gaps outer 20
+default_border normal 0
+
+#swayfx
+corner_radius 6
+shadows off
+shadows_on_csd off
+shadow_blur_radius 20
+shadow_color #0000007F
+
+include /home/zzyzx/.config/sway/*
+include /etc/sway/config.d/*
+
+#thug
+for_window [title="fullscreen *"] fullscreen disable; tiling enable
+#exec --no-startup-id "i3-msg -t subscribe '[ \"window\" ]' -m | while read -r line; do i3-msg '[class=chorme] fullscreen enable'; done"
