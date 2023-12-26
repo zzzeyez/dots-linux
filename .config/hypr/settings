@@ -19,9 +19,9 @@ general {
 	gaps_out = 63
 	border_size = 1
 	#col.active_border = rgba($color7)
-	col.active_border = rgba(ffffff65)
+	col.active_border = rgba(ffffff23)
 	#transparent
-	col.inactive_border = rgba(ffffff35)
+	col.inactive_border = rgba(ffffff23)
 	#name, on, speed, curve
 	animation = workspaces, 1, 3, default
 	animation = windows, 1, 3, default
@@ -36,7 +36,7 @@ decoration {
     drop_shadow = yes
     shadow_range = 70
     shadow_render_power = 7
-    col.shadow = rgba(ffffff83)
+    col.shadow = rgba(ffffff33)
     col.shadow_inactive = rgba(ffffff00)
 }
 

@@ -78,7 +78,7 @@
 		"format": "<span foreground=\"#222\">❤</span>    {capacity}%",
 		"format-charging": "<span foreground=\"#222\">❤</span>    {capacity}%",
 		"format-plugged": "<span foreground=\"#222\">❤</span>    {capacity}%",
-		"on-click": "wlogout"
+		"on-click": "grim -t jpeg /home/zzyzx/.config/wlogout/shot.jpg && convert -scale 10% -blur 0x2.5 -resize 1000% /home/zzyzx/.config/wlogout/shot.jpg /home/zzyzx/.config/wlogout/shot.jpg && wlogout -p layer-shell -L 777 -R 777 -T 480 -B 480"
 	},
 	
 }

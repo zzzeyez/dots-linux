@@ -208,6 +208,12 @@ hi CodewindowDeletion ctermbg=NONE ctermfg=1
 hi CodewindowUnderline ctermbg=NONE ctermfg=NONE
 hi CodewindowBoundsBackground ctermbg=NONE ctermfg=8
 
+" nvim-tree
+"hi! NvimTreeNormal ctermbg=NONE ctermfg=8
+hi! NvimTreeRootFolder ctermbg=NONE ctermfg=6
+hi! NvimTreeIndentMarker ctermbg=6 ctermfg=0
+hi! NvimTreeCursorLine ctermbg=6 ctermfg=0
+
 " italics
 hi Directory cterm=NONE
 hi Comment cterm=italic
